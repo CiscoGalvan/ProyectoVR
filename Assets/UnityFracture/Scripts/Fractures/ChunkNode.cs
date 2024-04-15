@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Project.Scripts.Utils;
 using UnityEngine;
+using UnityEngine.XR;
+using UnityEngine.XR.Interaction.Toolkit;
 
 namespace Project.Scripts.Fractures
 {
@@ -19,6 +21,9 @@ namespace Project.Scripts.Fractures
         public Color Color { get; set; } = Color.black;
         public bool HasBrokenLinks { get; private set; }
 
+
+
+        private XRGrabInteractable grabComponent;
         private bool Contains(ChunkNode chunkNode)
         {
             return Neighbours.Contains(chunkNode);
@@ -36,16 +41,27 @@ namespace Project.Scripts.Fractures
             
         }
 		private void Update()
-		{
+		{   
 			if (Input.GetKeyDown(KeyCode.R))
 			{
 				Unfreeze();
 			}
+			if (Input.GetKeyDown(KeyCode.F) && NeighboursArray.Length == 0)
+			{
+                this.transform.GetChild(1).GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+                this.transform.GetChild(0).GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+				//this.transform.GetChild(1).GetComponent<Rigidbody>().freezeRotation = false;
+            
+			}
+		
 		}
-
+    
+        
 		public void Setup()
         {
-            rb = GetComponent<Rigidbody>();
+
+            grabComponent = GetComponent<XRGrabInteractable>();
+			rb = GetComponent<Rigidbody>();
 			Freeze();
 		
 
@@ -70,8 +86,12 @@ namespace Project.Scripts.Fractures
 
             NeighboursArray = Neighbours.ToArray();
         }
-
-        private void OnJointBreak(float breakForce)
+		void ObjetoSoltado(SelectExitEventArgs args)
+		{
+			Debug.Log("El objeto ha sido soltado.");
+			// Realiza aqu� las acciones que deseas cuando el objeto es soltado
+		}
+		private void OnJointBreak(float breakForce)
         {
             HasBrokenLinks = true;
         }

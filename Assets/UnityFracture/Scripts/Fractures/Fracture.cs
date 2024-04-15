@@ -1,7 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using Project.Scripts.Utils;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.XR.Interaction;
+using UnityEngine.XR.Interaction.Toolkit;
 
 namespace Project.Scripts.Fractures
 {
@@ -45,7 +48,13 @@ namespace Project.Scripts.Fractures
             }
             // Graph manager freezes/unfreezes blocks depending on whether they are connected to the graph or not
             var graphManager = fractureGameObject.AddComponent<ChunkGraphManager>();
-            graphManager.Setup(fractureGameObject.GetComponentsInChildren<Rigidbody>());
+
+            fractureGameObject.AddComponent<Rigidbody>();
+            var XrGrab = gameObject.GetComponent<XRGrabInteractable>();
+            var XrGrab2 = fractureGameObject.AddComponent<XRGrabInteractable>();
+            XrGrab2.interactionLayers = XrGrab.interactionLayers;
+			graphManager.Setup(fractureGameObject.GetComponentsInChildren<Rigidbody>());
+          
             
             return graphManager;
         }
