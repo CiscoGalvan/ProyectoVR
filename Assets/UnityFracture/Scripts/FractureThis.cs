@@ -1,5 +1,6 @@
 using UnityEngine;
 using Random = System.Random;
+using Project.Scripts.Fractures;
 
 namespace Project.Scripts.Fractures
 {
@@ -36,5 +37,7 @@ namespace Project.Scripts.Fractures
                 density
             );
         }
+
+       
     }
 }

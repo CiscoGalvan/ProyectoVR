@@ -25,8 +25,8 @@ namespace Project.Scripts.Fractures
         {
             var runSearch = false;
             foreach (var brokenNodes in nodes.Where(n => n.HasBrokenLinks))
-            {
-                brokenNodes.CleanBrokenLinks();
+			{		
+				brokenNodes.CleanBrokenLinks();
                 runSearch = true;
             }
             
@@ -34,7 +34,10 @@ namespace Project.Scripts.Fractures
                 SearchGraph(nodes);
         }
 
-        private Color[] colors =
+
+		
+
+		private Color[] colors =
         {
             Color.blue, 
             Color.green, 

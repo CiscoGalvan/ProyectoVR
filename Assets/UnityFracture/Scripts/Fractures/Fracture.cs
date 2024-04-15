@@ -48,11 +48,15 @@ namespace Project.Scripts.Fractures
             }
             // Graph manager freezes/unfreezes blocks depending on whether they are connected to the graph or not
             var graphManager = fractureGameObject.AddComponent<ChunkGraphManager>();
-
             fractureGameObject.AddComponent<Rigidbody>();
+
             var XrGrab = gameObject.GetComponent<XRGrabInteractable>();
             var XrGrab2 = fractureGameObject.AddComponent<XRGrabInteractable>();
+
+
             XrGrab2.interactionLayers = XrGrab.interactionLayers;
+            XrGrab2.selectExited = XrGrab.selectExited;
+            XrGrab2.useDynamicAttach = true;
 			graphManager.Setup(fractureGameObject.GetComponentsInChildren<Rigidbody>());
           
             
