@@ -44,14 +44,24 @@ namespace Project.Scripts.Fractures
 		//}
 		private void Update()
 		{
-
-			//Descomentar
-			//         if (launched && actualTime + 0.1 < Time.realtimeSinceStartup)
-			//         {
-
-			//	GetComponent<Rigidbody>().isKinematic = false;
-			//             launched = false;
+			//if(transform.position.y < 0 && !frozen)
+			//{
+			//	frozen = true;
+			//	transform.position.SetY(0);
+			//	Freeze();
 			//}
+			//else if(transform.position.y >= 0.5 && frozen)
+			//{
+			//	frozen = false;
+			//	Unfreeze();
+			//}
+			////Descomentar
+			////if (launched && actualTime + 0.1 < Time.realtimeSinceStartup)
+			////{
+
+			////	GetComponent<Rigidbody>().isKinematic = false;
+			////	launched = false;
+			////}
 
 		}
 
@@ -127,10 +137,8 @@ namespace Project.Scripts.Fractures
 				GameObject g = trans.GetChild(i).gameObject;
 				ChunkNode a = g.GetComponent<ChunkNode>();
 				//Descomentar
-				//g.GetComponent<Rigidbody>().isKinematic = true;
-				//g.GetComponent<Rigidbody>().detectCollisions = true ;
-				//g.GetComponent<Rigidbody>().collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative ;
 				a.falll();
+				a.frozen = false;
 			}
 		}
 		public void falll()
@@ -139,9 +147,12 @@ namespace Project.Scripts.Fractures
 			rb.constraints = RigidbodyConstraints.None;
 			rb.useGravity = true;
 			rb.gameObject.layer = LayerMask.NameToLayer("Default");
-			//Descomentar
+			//GetComponent<Rigidbody>().isKinematic = false;
+			////Descomentar
+
+
 			//launched = true;
-			//actualTime = Time.realtimeSinceStartup; print(actualTime);
+			//actualTime = Time.realtimeSinceStartup; 
 		}
 
 		private void Freeze()

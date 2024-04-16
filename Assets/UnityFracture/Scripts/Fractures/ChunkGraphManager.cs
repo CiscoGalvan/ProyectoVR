@@ -21,7 +21,7 @@ namespace Project.Scripts.Fractures
             }
         }
         
-        private void FixedUpdate()
+        private void Update()
         {
             var runSearch = false;
             foreach (var brokenNodes in nodes.Where(n => n.HasBrokenLinks))

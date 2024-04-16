@@ -41,14 +41,29 @@ namespace Project.Scripts.Fractures
             // Set anchored chunks as kinematic
             AnchorChunks(gameObject, anchor);
 
-            var fractureGameObject = new GameObject("Fracture");
+            var fractureGameObject = new GameObject(gameObject.name + "Object");
             foreach (var chunk in chunks)
             {
                 chunk.transform.SetParent(fractureGameObject.transform, false);
             }
             // Graph manager freezes/unfreezes blocks depending on whether they are connected to the graph or not
+
+   //         var objetoVacio = new GameObject("Empty");
+   //         objetoVacio.transform.SetParent(fractureGameObject.transform, false);
+   //         objetoVacio.AddComponent<BoxCollider>().isTrigger = true;
+   //         Rigidbody rb = objetoVacio.AddComponent<Rigidbody>();
+			
+			//rb.constraints = RigidbodyConstraints.FreezeAll;
+			//rb.useGravity = false;
+			//rb.gameObject.layer = LayerMask.NameToLayer("FrozenChunks");
+			
+			//objetoVacio.AddComponent<DetectColl>();
+   //         objetoVacio.transform.SetPositionAndRotation(gameObject.transform.position, gameObject.transform.rotation);
+
+
             var graphManager = fractureGameObject.AddComponent<ChunkGraphManager>();
             fractureGameObject.AddComponent<Rigidbody>();
+          
 
             var XrGrab = gameObject.GetComponent<XRGrabInteractable>();
             var XrGrab2 = fractureGameObject.AddComponent<XRGrabInteractable>();

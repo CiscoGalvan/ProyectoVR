@@ -25,7 +25,7 @@ namespace Project.Scripts.Fractures
         public ChunkGraphManager FractureGameobject()
         {
             var seed = rng.Next();
-            print(this.gameObject.name);
+
             return Fracture.FractureGameObject(
                 gameObject,
                 anchor,
