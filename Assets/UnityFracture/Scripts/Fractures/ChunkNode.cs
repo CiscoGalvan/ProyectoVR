@@ -44,24 +44,7 @@ namespace Project.Scripts.Fractures
 		//}
 		private void Update()
 		{
-			//if(transform.position.y < 0 && !frozen)
-			//{
-			//	frozen = true;
-			//	transform.position.SetY(0);
-			//	Freeze();
-			//}
-			//else if(transform.position.y >= 0.5 && frozen)
-			//{
-			//	frozen = false;
-			//	Unfreeze();
-			//}
-			////Descomentar
-			////if (launched && actualTime + 0.1 < Time.realtimeSinceStartup)
-			////{
-
-			////	GetComponent<Rigidbody>().isKinematic = false;
-			////	launched = false;
-			////}
+	
 
 		}
 
@@ -130,8 +113,10 @@ namespace Project.Scripts.Fractures
 
 		public void Unfreeze()
 		{
-			if (NeighboursArray.Length != 0) return;
+			if (GetComponent<AudioSource>() == null) return;
 			falll();
+			GetComponent<AudioSource>().volume = 0.1f;
+			GetComponent<AudioSource>().Play();
 			for (int i = 0; i < trans.childCount - 1; i++)
 			{
 				GameObject g = trans.GetChild(i).gameObject;

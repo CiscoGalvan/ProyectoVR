@@ -48,24 +48,19 @@ namespace Project.Scripts.Fractures
             }
             // Graph manager freezes/unfreezes blocks depending on whether they are connected to the graph or not
 
-   //         var objetoVacio = new GameObject("Empty");
-   //         objetoVacio.transform.SetParent(fractureGameObject.transform, false);
-   //         objetoVacio.AddComponent<BoxCollider>().isTrigger = true;
-   //         Rigidbody rb = objetoVacio.AddComponent<Rigidbody>();
-			
-			//rb.constraints = RigidbodyConstraints.FreezeAll;
-			//rb.useGravity = false;
-			//rb.gameObject.layer = LayerMask.NameToLayer("FrozenChunks");
-			
-			//objetoVacio.AddComponent<DetectColl>();
-   //         objetoVacio.transform.SetPositionAndRotation(gameObject.transform.position, gameObject.transform.rotation);
-
-
             var graphManager = fractureGameObject.AddComponent<ChunkGraphManager>();
             fractureGameObject.AddComponent<Rigidbody>();
-          
 
-            var XrGrab = gameObject.GetComponent<XRGrabInteractable>();
+			#region AudioSource
+			var audio = gameObject.GetComponent<AudioSource>();
+			var audio2 = fractureGameObject.AddComponent<AudioSource>();
+
+
+            audio2.clip = audio.clip;
+            audio2.spatialBlend = 1;
+            audio2.playOnAwake = false;
+			#endregion
+			var XrGrab = gameObject.GetComponent<XRGrabInteractable>();
             var XrGrab2 = fractureGameObject.AddComponent<XRGrabInteractable>();
 
 
