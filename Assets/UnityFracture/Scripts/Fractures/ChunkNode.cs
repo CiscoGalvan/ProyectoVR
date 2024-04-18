@@ -21,8 +21,6 @@ namespace Project.Scripts.Fractures
 		private bool frozen;
 		private bool launched = false;
 		private Transform trans;
-		private float actualTime = 0;
-		private float collisionTime = 0;
 
 		bool r = false;
 		public bool IsStatic => rb.isKinematic;
@@ -30,14 +28,28 @@ namespace Project.Scripts.Fractures
 		public bool HasBrokenLinks { get; private set; }
 
 
-		float delay = 0.1f;
-		private XRGrabInteractable grabComponent;
+		float launchedTime;
 		private bool Contains(ChunkNode chunkNode)
 		{
 			return Neighbours.Contains(chunkNode);
 		}
 
-		
+		private void Update()
+		{
+			if (launched && trans.childCount != 0 && launchedTime + Time.deltaTime < Time.realtimeSinceStartup) 
+			{
+				Vector3 vel = (GetComponent<Rigidbody>().velocity);
+				while (trans.childCount != 1)
+				{
+					trans.GetChild(0).transform.SetParent(null);
+					if(trans.GetChild(0).GetComponent<Rigidbody>() != null)
+					{
+						trans.GetChild(0).GetComponent<Rigidbody>().velocity = vel;
+					}
+				}
+				Destroy(this.gameObject);
+			}
+		}
 		public void Setup()
 		{
 
@@ -72,9 +84,8 @@ namespace Project.Scripts.Fractures
 	
 		private void OnJointBreak(float breakForce)
 		{
-			//print(breakForce);
-			//falll();
-			//HasBrokenLinks = true;
+
+			HasBrokenLinks = true;
 		}
 
 		public void CleanBrokenLinks()
@@ -106,8 +117,11 @@ namespace Project.Scripts.Fractures
 		{
 			if (GetComponent<AudioSource>() == null) return;
 			falll();
+			launched = true;
+			launchedTime = Time.realtimeSinceStartup;
 			GetComponent<AudioSource>().volume = 0.1f;
 			GetComponent<AudioSource>().Play();
+		
 			for (int i = 0; i < trans.childCount - 1; i++)
 			{
 				GameObject g = trans.GetChild(i).gameObject;
@@ -115,12 +129,13 @@ namespace Project.Scripts.Fractures
 				//Descomentar
 				a.falll();
 			}
-			while (trans.childCount !=0)
-			{
-				trans.GetChild(0).SetParent(null);
-			}
 
-			Destroy(this.gameObject);
+			
+			//Destroy(this.gameObject);
+		}
+		private void noChild()
+		{
+			
 		}
 		public void falll()
 		{
