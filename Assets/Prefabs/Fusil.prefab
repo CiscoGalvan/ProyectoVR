@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 234126053898064035}
   - component: {fileID: 5274036255636796287}
   m_Layer: 3
-  m_Name: Fusil 1 1 1
+  m_Name: Fusil
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -29,7 +29,6 @@ namespace Project.Scripts.Weapon
 		private void Start()
 		{
             sonidoNoAmmo = Resources.Load<AudioClip>("realistic-pop-button-5-click-message-interface-SBA-300463307");
-            print(sonidoNoAmmo.name);
             sonidoSiAmmo = audio.clip;
 		}
 		public float Radius
