@@ -67,7 +67,7 @@ namespace Project.Scripts.Fractures
             }
             foreach (var sub in search)
             {
-                sub.Unfreeze();
+                //sub.Unfreeze();
                 sub.Color = Color.black;
             }
         }

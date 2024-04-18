@@ -5,6 +5,7 @@ using Project.Scripts.Weapon;
 using UnityEngine;
 using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
+using UnityEditor;
 
 namespace Project.Scripts.Fractures
 {
@@ -21,6 +22,7 @@ namespace Project.Scripts.Fractures
 		private bool launched = false;
 		private Transform trans;
 		private float actualTime = 0;
+		private float collisionTime = 0;
 
 		bool r = false;
 		public bool IsStatic => rb.isKinematic;
@@ -35,20 +37,7 @@ namespace Project.Scripts.Fractures
 			return Neighbours.Contains(chunkNode);
 		}
 
-		//private void FixedUpdate()
-		//{
-		//    // Kinda hacky, but otherwise the chunks slowly drift apart.
-
-
-
-		//}
-		private void Update()
-		{
-	
-
-		}
-
-
+		
 		public void Setup()
 		{
 
@@ -80,10 +69,12 @@ namespace Project.Scripts.Fractures
 
 			NeighboursArray = Neighbours.ToArray();
 		}
-
+	
 		private void OnJointBreak(float breakForce)
 		{
-			HasBrokenLinks = true;
+			//print(breakForce);
+			//falll();
+			//HasBrokenLinks = true;
 		}
 
 		public void CleanBrokenLinks()
@@ -123,8 +114,13 @@ namespace Project.Scripts.Fractures
 				ChunkNode a = g.GetComponent<ChunkNode>();
 				//Descomentar
 				a.falll();
-				a.frozen = false;
 			}
+			while (trans.childCount !=0)
+			{
+				trans.GetChild(0).SetParent(null);
+			}
+
+			Destroy(this.gameObject);
 		}
 		public void falll()
 		{
@@ -132,22 +128,18 @@ namespace Project.Scripts.Fractures
 			rb.constraints = RigidbodyConstraints.None;
 			rb.useGravity = true;
 			rb.gameObject.layer = LayerMask.NameToLayer("Default");
-			//GetComponent<Rigidbody>().isKinematic = false;
-			////Descomentar
-
-
-			//launched = true;
-			//actualTime = Time.realtimeSinceStartup; 
+			rb.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
+			rb.isKinematic = false;
+			
 		}
 
 		private void Freeze()
 		{
+
 			frozen = true;
 			rb.constraints = RigidbodyConstraints.FreezeAll;
 			rb.useGravity = false;
 			rb.gameObject.layer = LayerMask.NameToLayer("FrozenChunks");
-			frozenPos = rb.transform.position;
-			forzenRot = rb.transform.rotation;
 
 		}
 

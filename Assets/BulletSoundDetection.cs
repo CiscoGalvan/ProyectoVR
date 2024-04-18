@@ -23,9 +23,5 @@ public class BulletSoundDetection : MonoBehaviour
 		}
 	}
 
-	// Update is called once per frame
-	void Update()
-    {
-        
-    }
+
 }

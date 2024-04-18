@@ -10,9 +10,8 @@ public class Unfreeze : MonoBehaviour
 	{
 		//Que algo cambie el nombre
 		name = name + "Object";
-		print(name);
 		GameObject g = GameObject.Find(name);
-		if(g == null)print(name);
+
 		var a = g.GetComponent<ChunkNode>();
 		if (a != null)
 		{
