@@ -28,7 +28,7 @@ namespace Project.Scripts.Weapon
 
 		private void Start()
 		{
-            sonidoNoAmmo = Resources.Load<AudioClip>("realistic-pop-button-5-click-message-interface-SBA-300463307");
+            sonidoNoAmmo = Resources.Load<AudioClip>("Quad Out of Ammo (Fortnite Sound) - Sound Effect for editing (mp3cut.net)");
             sonidoSiAmmo = audio.clip;
 		}
 		public float Radius

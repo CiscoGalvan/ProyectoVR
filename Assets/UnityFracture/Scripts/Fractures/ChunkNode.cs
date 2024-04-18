@@ -104,7 +104,6 @@ namespace Project.Scripts.Fractures
 	
 		private void OnJointBreak(float breakForce)
 		{
-			print(breakForce);
 			if(this.trans.parent != null)
 			{
 				this.trans.parent.GetComponent<ChunkNode>().Unfreeze();
