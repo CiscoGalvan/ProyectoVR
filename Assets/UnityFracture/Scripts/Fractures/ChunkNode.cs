@@ -21,7 +21,7 @@ namespace Project.Scripts.Fractures
 		private bool frozen;
 		private bool launched = false;
 		private Transform trans;
-
+		private XRGrabInteractable grabCmmponent;
 		bool r = false;
 		public bool IsStatic => rb.isKinematic;
 		public Color Color { get; set; } = Color.black;
@@ -55,7 +55,7 @@ namespace Project.Scripts.Fractures
 
 			trans = GetComponent<Transform>();
 			rb = GetComponent<Rigidbody>();
-
+			
 
 			Freeze();
 
@@ -84,6 +84,11 @@ namespace Project.Scripts.Fractures
 	
 		private void OnJointBreak(float breakForce)
 		{
+			print(breakForce);
+			if(this.trans.parent != null)
+			{
+				this.trans.parent.GetComponent<ChunkNode>().Unfreeze();
+			}
 
 			HasBrokenLinks = true;
 		}
