@@ -208,7 +208,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &44452260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2925,7 +2925,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &980350673
 Transform:
   m_ObjectHideFlags: 0
@@ -2935,8 +2935,8 @@ Transform:
   m_GameObject: {fileID: 980350672}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.54, y: 12.22, z: -12.65}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -9.7, y: 12.22, z: -12.65}
+  m_LocalScale: {x: 0.37068, y: 0.37068, z: 0.6959146}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 643111680}
@@ -3242,7 +3242,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anchor: 4
-  chunks: 344
+  chunks: 73
   density: 150.1
   internalStrength: 482.8
   insideMaterial: {fileID: 2100000, guid: 55162ad2422d980459302b0ec10a20da, type: 2}
@@ -4790,15 +4790,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keyCodeFractureThisPairs:
-  - KeyCode: 49
+  - KeyCode: 0
     FractureThis: {fileID: 44452260}
-  - KeyCode: 50
-    FractureThis: {fileID: 0}
-  - KeyCode: 51
-    FractureThis: {fileID: 0}
-  - KeyCode: 52
-    FractureThis: {fileID: 0}
-  - KeyCode: 52
+  - KeyCode: 0
+    FractureThis: {fileID: 322319419}
+  - KeyCode: 0
     FractureThis: {fileID: 980350677}
 --- !u!1 &1909142406
 GameObject:

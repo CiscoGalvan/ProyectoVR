@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEditor;
+using UnityEngine.XR.Interaction.Toolkit.Transformers;
 
 namespace Project.Scripts.Fractures
 {
@@ -22,12 +23,13 @@ namespace Project.Scripts.Fractures
 		private bool launched = false;
 		private Transform trans;
 		private XRGrabInteractable grabCmmponent;
+		private XRGeneralGrabTransformer grabTrans;
 		bool r = false;
 		public bool IsStatic => rb.isKinematic;
 		public Color Color { get; set; } = Color.black;
 		public bool HasBrokenLinks { get; private set; }
 
-
+		InteractionLayerMask layerMask;
 		float launchedTime;
 		private bool Contains(ChunkNode chunkNode)
 		{
@@ -39,13 +41,26 @@ namespace Project.Scripts.Fractures
 			if (launched && trans.childCount != 0 && launchedTime + Time.deltaTime < Time.realtimeSinceStartup) 
 			{
 				Vector3 vel = (GetComponent<Rigidbody>().velocity);
+				//var manager = GameObject.Find("XR Interaction Manager").GetComponent<XRInteractionManager>();
 				while (trans.childCount != 1)
 				{
-					trans.GetChild(0).transform.SetParent(null);
-					if(trans.GetChild(0).GetComponent<Rigidbody>() != null)
+					GameObject child = trans.GetChild(0).gameObject;
+					child.transform.SetParent(null);
+					if(child.GetComponent<Rigidbody>() != null)
 					{
-						trans.GetChild(0).GetComponent<Rigidbody>().velocity = vel;
+						child.GetComponent<Rigidbody>().velocity = vel;
+						var a =child.AddComponent<XRGrabInteractable>();
+						//manager.SendMessage("Awake");
+						//child.SendMessage("Awake");
+					
+						//manager.RegisterInteractable(a);
+						
+						a.interactionLayers = layerMask;
+						a.useDynamicAttach = true;
+						child.layer = 3;
+						//child.AddComponent<XRGeneralGrabTransformer>();
 					}
+					
 				}
 				Destroy(this.gameObject);
 			}
@@ -54,9 +69,14 @@ namespace Project.Scripts.Fractures
 		{
 
 			trans = GetComponent<Transform>();
-			rb = GetComponent<Rigidbody>();
-			
+			rb = GetComponent<Rigidbody>(); rb.isKinematic = false;
 
+			if (trans.childCount != 0)
+			{
+				grabCmmponent = GetComponent<XRGrabInteractable>();
+				layerMask = grabCmmponent.interactionLayers;
+				grabTrans = GetComponent<XRGeneralGrabTransformer>();
+			}
 			Freeze();
 
 
@@ -149,7 +169,7 @@ namespace Project.Scripts.Fractures
 			rb.useGravity = true;
 			rb.gameObject.layer = LayerMask.NameToLayer("Default");
 			rb.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
-			rb.isKinematic = false;
+		
 			
 		}
 
