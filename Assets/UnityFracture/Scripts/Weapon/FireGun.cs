@@ -59,10 +59,12 @@ namespace Project.Scripts.Weapon
 		void Update()
         {
 			shootDir = dir.position - barrelEnd.position;
-            if (/*Input.GetMouseButtonDown(0) &&*/ grabbed)
+            if (Input.GetMouseButtonDown(0) && grabbed)
             {
-                print("b");
+                if (bulletNum > 0)
                     FireBullet();
+                else
+                    CantShoot();
               
             }
             
@@ -71,7 +73,7 @@ namespace Project.Scripts.Weapon
         private void CantShoot()
         {
             audio.clip = sonidoNoAmmo;
-            print("pppp");
+            audio.Play();
         }
         private void FireBullet()
         {
@@ -95,6 +97,7 @@ namespace Project.Scripts.Weapon
 		
 			var rbUsed = usedBullet.AddComponent<Rigidbody>();
 			rbUsed.velocity = usedBullet.transform.right * Velocity / 100;
+			rbUsed.angularVelocity = usedBullet.transform.up * Random.Range(-100, 100) + usedBullet.transform.forward * Random.Range(-100, 100);
 			rbUsed.mass = mass;
 			rbUsed.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
 
