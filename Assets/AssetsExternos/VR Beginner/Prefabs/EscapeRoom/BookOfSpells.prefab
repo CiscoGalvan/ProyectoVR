@@ -420,7 +420,7 @@ PrefabInstance:
     - target: {fileID: 4083905144059893248, guid: c0658d00c20d19d46ba322f21394d830, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 1912cf3f8f6b9c644bbf1d004c946284, type: 2}
+      objectReference: {fileID: 2100000, guid: b087163334465c846aaae5f8ba363f50, type: 2}
     - target: {fileID: 4415425914996879811, guid: c0658d00c20d19d46ba322f21394d830, type: 3}
       propertyPath: m_Name
       value: BookOfSpells
