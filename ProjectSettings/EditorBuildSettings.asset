@@ -9,6 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Taller_EIRV-RVUnity.unity
     guid: 679c77abbef025548ad0c3f8d6f3f57f
   m_configObjects:
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 398d945149746a94899cafbfeddf8c9f, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: db19807ac52b8a44a8044a776e07b1ea, type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: d89ccd653d9f58c4792311b45414ecc2, type: 2}
     xr.sdk.mock-hmd.settings: {fileID: 11400000, guid: 05e3db0544d851a44bce481dc3328a19, type: 2}

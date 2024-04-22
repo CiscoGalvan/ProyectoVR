@@ -51,6 +51,12 @@ namespace Project.Scripts.Fractures
             var graphManager = fractureGameObject.AddComponent<ChunkGraphManager>();
             fractureGameObject.AddComponent<Rigidbody>();
 
+            var selectionOutline = gameObject.GetComponent<SelectionOutline>();
+            if(selectionOutline != null)
+            {
+				var b =fractureGameObject.AddComponent<SelectionOutline>();
+                b = selectionOutline;
+			}
 			#region AudioSource
 			var audio = gameObject.GetComponent<AudioSource>();
 			var audio2 = fractureGameObject.AddComponent<AudioSource>();
@@ -60,13 +66,18 @@ namespace Project.Scripts.Fractures
             audio2.spatialBlend = 1;
             audio2.playOnAwake = false;
 			#endregion
+
 			var XrGrab = gameObject.GetComponent<XRGrabInteractable>();
-            var XrGrab2 = fractureGameObject.AddComponent<XRGrabInteractable>();
+            if(XrGrab != null)
+            {
+				var XrGrab2 = fractureGameObject.AddComponent<XRGrabInteractable>();
 
 
-            XrGrab2.interactionLayers = XrGrab.interactionLayers;
-            XrGrab2.selectExited = XrGrab.selectExited;
-            XrGrab2.useDynamicAttach = true;
+				XrGrab2.interactionLayers = XrGrab.interactionLayers;
+				XrGrab2.selectExited = XrGrab.selectExited;
+				XrGrab2.useDynamicAttach = true;
+			}
+   
 			graphManager.Setup(fractureGameObject.GetComponentsInChildren<Rigidbody>());
           
             
@@ -226,13 +237,17 @@ namespace Project.Scripts.Fractures
             var chunk = new GameObject($"Chunk");
             
             var renderer = chunk.AddComponent<MeshRenderer>();
-            renderer.sharedMaterials = new[]
-            {
-                outsideMaterial,
-                insideMaterial
-            };
-
-            var meshFilter = chunk.AddComponent<MeshFilter>();
+           
+            if(insideMaterial != outsideMaterial) { 
+                renderer.sharedMaterials = new[]
+                {
+              
+                    outsideMaterial,
+                    insideMaterial
+                };
+			}
+            else renderer.sharedMaterials = new[] { outsideMaterial }; 
+			var meshFilter = chunk.AddComponent<MeshFilter>();
             meshFilter.sharedMesh = mesh;
 
             var rigibody = chunk.AddComponent<Rigidbody>();

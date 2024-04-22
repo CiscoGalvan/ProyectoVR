@@ -49,16 +49,16 @@ namespace Project.Scripts.Fractures
 					if(child.GetComponent<Rigidbody>() != null)
 					{
 						child.GetComponent<Rigidbody>().velocity = vel;
-						var a =child.AddComponent<XRGrabInteractable>();
-						//manager.SendMessage("Awake");
-						//child.SendMessage("Awake");
+						//var a =child.AddComponent<XRGrabInteractable>();
+						////manager.SendMessage("Awake");
+						////child.SendMessage("Awake");
 					
-						//manager.RegisterInteractable(a);
+						////manager.RegisterInteractable(a);
 						
-						a.interactionLayers = layerMask;
-						a.useDynamicAttach = true;
-						child.layer = 3;
-						//child.AddComponent<XRGeneralGrabTransformer>();
+						//a.interactionLayers = layerMask;
+						//a.useDynamicAttach = true;
+						//child.layer = 3;
+						////child.AddComponent<XRGeneralGrabTransformer>();
 					}
 					
 				}
@@ -73,10 +73,14 @@ namespace Project.Scripts.Fractures
 
 			if (trans.childCount != 0)
 			{
+
 				grabCmmponent = GetComponent<XRGrabInteractable>();
-				layerMask = grabCmmponent.interactionLayers;
-				grabTrans = GetComponent<XRGeneralGrabTransformer>();
+				if(grabCmmponent != null) {
+					layerMask = grabCmmponent.interactionLayers;
+					grabTrans = GetComponent<XRGeneralGrabTransformer>();
+				}
 			}
+			
 			Freeze();
 
 
@@ -104,7 +108,7 @@ namespace Project.Scripts.Fractures
 	
 		private void OnJointBreak(float breakForce)
 		{
-			if(this.trans.parent != null)
+			if(this.trans.parent != null && breakForce > 1000)
 			{
 				this.trans.parent.GetComponent<ChunkNode>().Unfreeze();
 			}
@@ -143,9 +147,12 @@ namespace Project.Scripts.Fractures
 			falll();
 			launched = true;
 			launchedTime = Time.realtimeSinceStartup;
-			GetComponent<AudioSource>().volume = 0.1f;
-			GetComponent<AudioSource>().Play();
 		
+			GetComponent<AudioSource>().volume = 0.1f;
+			if(GetComponent<AudioSource>().clip != null)
+				GetComponent<AudioSource>().Play();
+			
+
 			for (int i = 0; i < trans.childCount - 1; i++)
 			{
 				GameObject g = trans.GetChild(i).gameObject;
@@ -157,10 +164,7 @@ namespace Project.Scripts.Fractures
 			
 			//Destroy(this.gameObject);
 		}
-		private void noChild()
-		{
-			
-		}
+	
 		public void falll()
 		{
 			frozen = false;
