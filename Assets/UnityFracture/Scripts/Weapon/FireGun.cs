@@ -76,38 +76,42 @@ namespace Project.Scripts.Weapon
         }
         public void FireBullet()
         {
-            if (bulletNum < 0) CantShoot();
+            if (bulletNum < 0)
+            {
+
+                CantShoot();
+            }
             else
             {
-				audio.clip = sonidoSiAmmo;
-				var bullet = GameObject.Instantiate(prefab);
-				bullet.transform.position = barrelEnd.position;
-				bullet.transform.forward = shootDir;
-				bullet.transform.localScale = Vector3.one * Radius;
+                audio.clip = sonidoSiAmmo;
+                var bullet = GameObject.Instantiate(prefab);
+                bullet.transform.position = barrelEnd.position;
+                bullet.transform.forward = shootDir;
+                bullet.transform.localScale = Vector3.one * Radius;
 
-				var rb = bullet.AddComponent<Rigidbody>();
-				rb.velocity = bullet.transform.forward * Velocity;
-				rb.mass = mass;
-				rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
-
-
-				var usedBullet = GameObject.Instantiate(usedBulletPrefab);
-				usedBullet.transform.position = usedBulleTransform.position;
-				usedBullet.transform.forward = shootDir;
-				usedBullet.transform.localScale = Vector3.one * Radius;
+                var rb = bullet.AddComponent<Rigidbody>();
+                rb.velocity = bullet.transform.forward * Velocity;
+                rb.mass = mass;
+                rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
 
 
-				var rbUsed = usedBullet.AddComponent<Rigidbody>();
-				rbUsed.velocity = usedBullet.transform.right * Velocity / 100;
-				rbUsed.angularVelocity = usedBullet.transform.up * Random.Range(-100, 100) + usedBullet.transform.forward * Random.Range(-100, 100);
-				rbUsed.mass = mass;
-				rbUsed.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+                var usedBullet = GameObject.Instantiate(usedBulletPrefab);
+                usedBullet.transform.position = usedBulleTransform.position;
+                usedBullet.transform.forward = shootDir;
+                usedBullet.transform.localScale = Vector3.one * Radius;
 
 
-				audio.Play();
-				bulletNum--;
-				Destroy(bullet, 3);
-			}
+                var rbUsed = usedBullet.AddComponent<Rigidbody>();
+                rbUsed.velocity = usedBullet.transform.right * Velocity / 100;
+                rbUsed.angularVelocity = usedBullet.transform.up * Random.Range(-100, 100) + usedBullet.transform.forward * Random.Range(-100, 100);
+                rbUsed.mass = mass;
+                rbUsed.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+
+
+                audio.Play();
+                bulletNum--;
+                Destroy(bullet, 3);
+            }
 		
 		}
     }
