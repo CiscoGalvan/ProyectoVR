@@ -1,6 +1,8 @@
 using Project.Scripts.Fractures;
 using UnityEngine;
 using Project.Scripts.Fractures;
+using UnityEngine.XR.Interaction.Toolkit;
+
 public class CombineMeshes : MonoBehaviour
 {
 	[SerializeField] private Anchor anchor = Anchor.Bottom;
@@ -13,12 +15,12 @@ public class CombineMeshes : MonoBehaviour
 	
 	
 	[SerializeField] private float mass;
-	
 
-	void Start()
+
+	void Awake()
 	{
 
-		
+
 		// Obtener todos los MeshFilters de los objetos hijos
 		MeshFilter[] meshFilters = GetComponentsInChildren<MeshFilter>();
 
@@ -33,7 +35,7 @@ public class CombineMeshes : MonoBehaviour
 		}
 
 		// Crear un nuevo GameObject para contener el mesh combinado
-		GameObject combinedObject = new GameObject("CombinedMesh");
+		GameObject combinedObject = new GameObject(this.gameObject.name);
 		combinedObject.transform.SetParent(transform);
 
 		// Agregar un MeshFilter al nuevo GameObject
@@ -63,11 +65,28 @@ public class CombineMeshes : MonoBehaviour
 
 		var rigidBody = combinedObject.AddComponent<Rigidbody>();
 		rigidBody.mass = mass;
+		rigidBody.useGravity = false;
+		rigidBody.isKinematic = true;
 
-		// Desactivar los MeshFilters de los objetos hijos para que no se rendericen individualmente
-		foreach (MeshFilter filter in meshFilters)
+		var XrGrab = gameObject.GetComponent<XRGrabInteractable>();
+		if (XrGrab != null)
 		{
-			filter.gameObject.SetActive(false);
+			var XrGrab2 = combinedObject.AddComponent<XRGrabInteractable>();
+
+
+			XrGrab2.interactionLayers = XrGrab.interactionLayers;
+			XrGrab2.selectExited = XrGrab.selectExited;
+			XrGrab2.useDynamicAttach = true;
+
+			// Desactivar los MeshFilters de los objetos hijos para que no se rendericen individualmente
+			foreach (MeshFilter filter in meshFilters)
+			{
+				filter.gameObject.SetActive(false);
+			}
 		}
+
+		var meshCollider = combinedObject.AddComponent<MeshCollider>();
+		meshCollider.convex = true;
+	
 	}
 }

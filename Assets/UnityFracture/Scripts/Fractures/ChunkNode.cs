@@ -41,28 +41,26 @@ namespace Project.Scripts.Fractures
 			if (launched && trans.childCount != 0 && launchedTime + Time.deltaTime < Time.realtimeSinceStartup) 
 			{
 				Vector3 vel = (GetComponent<Rigidbody>().velocity);
-				//var manager = GameObject.Find("XR Interaction Manager").GetComponent<XRInteractionManager>();
 				while (trans.childCount != 1)
 				{
 					GameObject child = trans.GetChild(0).gameObject;
 					child.transform.SetParent(null);
-					if(child.GetComponent<Rigidbody>() != null)
+					AudioClip clip = Resources.Load<AudioClip>("a");
+					if (child.GetComponent<Rigidbody>() != null)
 					{
 						child.GetComponent<Rigidbody>().velocity = vel;
-						//var a =child.AddComponent<XRGrabInteractable>();
-						////manager.SendMessage("Awake");
-						////child.SendMessage("Awake");
 					
-						////manager.RegisterInteractable(a);
+
+						var audio = child.AddComponent<AudioSource>();
+						audio.clip = clip;
+						audio.volume = 0.1f;
+						audio.playOnAwake = true;
+
 						
-						//a.interactionLayers = layerMask;
-						//a.useDynamicAttach = true;
-						//child.layer = 3;
-						////child.AddComponent<XRGeneralGrabTransformer>();
 					}
 					
 				}
-				Destroy(this.gameObject);
+				Destroy(this.gameObject,2);
 			}
 		}
 		public void Setup()
@@ -108,10 +106,13 @@ namespace Project.Scripts.Fractures
 	
 		private void OnJointBreak(float breakForce)
 		{
-			if(this.trans.parent != null && breakForce > 1000)
+			if (this.trans.parent != null && breakForce > 1000)
 			{
 				this.trans.parent.GetComponent<ChunkNode>().Unfreeze();
 			}
+			else if (breakForce > 1000) falll();
+
+			if (GetComponent<AudioSource>() != null) GetComponent<AudioSource>().Play();
 
 			HasBrokenLinks = true;
 		}
@@ -147,10 +148,7 @@ namespace Project.Scripts.Fractures
 			falll();
 			launched = true;
 			launchedTime = Time.realtimeSinceStartup;
-		
-			GetComponent<AudioSource>().volume = 0.1f;
-			if(GetComponent<AudioSource>().clip != null)
-				GetComponent<AudioSource>().Play();
+		    GetComponent<AudioSource>().Play();
 			
 
 			for (int i = 0; i < trans.childCount - 1; i++)

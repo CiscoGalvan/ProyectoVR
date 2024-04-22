@@ -51,12 +51,12 @@ namespace Project.Scripts.Fractures
             var graphManager = fractureGameObject.AddComponent<ChunkGraphManager>();
             fractureGameObject.AddComponent<Rigidbody>();
 
-            var selectionOutline = gameObject.GetComponent<SelectionOutline>();
-            if(selectionOutline != null)
-            {
-				var b =fractureGameObject.AddComponent<SelectionOutline>();
-                b = selectionOutline;
-			}
+   //         var selectionOutline = gameObject.GetComponent<SelectionOutline>();
+   //         if(selectionOutline != null)
+   //         {
+			//	var b =fractureGameObject.AddComponent<SelectionOutline>();
+   //             b = selectionOutline;
+			//}
 			#region AudioSource
 			var audio = gameObject.GetComponent<AudioSource>();
 			var audio2 = fractureGameObject.AddComponent<AudioSource>();
@@ -76,6 +76,7 @@ namespace Project.Scripts.Fractures
 				XrGrab2.interactionLayers = XrGrab.interactionLayers;
 				XrGrab2.selectExited = XrGrab.selectExited;
 				XrGrab2.useDynamicAttach = true;
+               
 			}
    
 			graphManager.Setup(fractureGameObject.GetComponentsInChildren<Rigidbody>());

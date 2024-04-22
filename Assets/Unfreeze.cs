@@ -12,6 +12,7 @@ public class Unfreeze : MonoBehaviour
 		name = name + "Object";
 		GameObject g = GameObject.Find(name);
 
+		
 		var a = g.GetComponent<ChunkNode>();
 		if (a != null)
 		{
