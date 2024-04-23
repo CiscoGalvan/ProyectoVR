@@ -42,21 +42,13 @@ namespace Project.Scripts.Fractures
             AnchorChunks(gameObject, anchor);
 
             var fractureGameObject = new GameObject(gameObject.name + "Object");
+          
             foreach (var chunk in chunks)
             {
                 chunk.transform.SetParent(fractureGameObject.transform, false);
             }
-            // Graph manager freezes/unfreezes blocks depending on whether they are connected to the graph or not
-
             var graphManager = fractureGameObject.AddComponent<ChunkGraphManager>();
             fractureGameObject.AddComponent<Rigidbody>();
-
-   //         var selectionOutline = gameObject.GetComponent<SelectionOutline>();
-   //         if(selectionOutline != null)
-   //         {
-			//	var b =fractureGameObject.AddComponent<SelectionOutline>();
-   //             b = selectionOutline;
-			//}
 			#region AudioSource
 			var audio = gameObject.GetComponent<AudioSource>();
 			var audio2 = fractureGameObject.AddComponent<AudioSource>();
@@ -76,7 +68,8 @@ namespace Project.Scripts.Fractures
 				XrGrab2.interactionLayers = XrGrab.interactionLayers;
 				XrGrab2.selectExited = XrGrab.selectExited;
 				XrGrab2.useDynamicAttach = true;
-               
+
+                XrGrab2.attachTransform = fractureGameObject.transform;
 			}
    
 			graphManager.Setup(fractureGameObject.GetComponentsInChildren<Rigidbody>());
