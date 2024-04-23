@@ -56,6 +56,7 @@ namespace Project.Scripts.Fractures
 
             audio2.clip = audio.clip;
             audio2.spatialBlend = 1;
+            audio2.volume = audio.volume;
             audio2.playOnAwake = false;
 			#endregion
 
