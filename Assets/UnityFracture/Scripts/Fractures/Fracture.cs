@@ -72,8 +72,12 @@ namespace Project.Scripts.Fractures
 
                 XrGrab2.attachTransform = fractureGameObject.transform;
 			}
-   
-			graphManager.Setup(fractureGameObject.GetComponentsInChildren<Rigidbody>());
+
+           
+
+
+
+            graphManager.Setup(fractureGameObject.GetComponentsInChildren<Rigidbody>());
           
             
             return graphManager;
