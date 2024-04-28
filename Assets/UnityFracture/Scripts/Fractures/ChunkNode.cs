@@ -45,7 +45,7 @@ namespace Project.Scripts.Fractures
 				{
 					GameObject child = trans.GetChild(0).gameObject;
 					child.transform.SetParent(null);
-					AudioClip clip = Resources.Load<AudioClip>("a");
+					AudioClip clip = Resources.Load<AudioClip>("Button Pop");
 					if (child.GetComponent<Rigidbody>() != null)
 					{
 						child.GetComponent<Rigidbody>().velocity = vel;
