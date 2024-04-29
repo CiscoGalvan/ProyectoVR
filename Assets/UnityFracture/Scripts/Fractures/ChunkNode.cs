@@ -29,7 +29,6 @@ namespace Project.Scripts.Fractures
 		public Color Color { get; set; } = Color.black;
 		public bool HasBrokenLinks { get; private set; }
 
-		InteractionLayerMask layerMask;
 		float launchedTime;
 		private bool Contains(ChunkNode chunkNode)
 		{
@@ -74,7 +73,6 @@ namespace Project.Scripts.Fractures
 
 				grabCmmponent = GetComponent<XRGrabInteractable>();
 				if(grabCmmponent != null) {
-					layerMask = grabCmmponent.interactionLayers;
 					grabTrans = GetComponent<XRGeneralGrabTransformer>();
 				}
 			}
