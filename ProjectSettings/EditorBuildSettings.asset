@@ -11,12 +11,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/escenacris.unity
     guid: 8cc2e586bb7ffb24691180562582924d
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/escenajose.unity
     guid: 8c96fd92b6fef44459dbb74d95977e59
   - enabled: 1
     path: Assets/Scenes/escenasheila.unity
     guid: c28ddd6214432fc41a090deeae375c63
+  - enabled: 1
+    path: Assets/Scenes/Scene.unity
+    guid: 63568db4659ed12488fa386830435bfd
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 398d945149746a94899cafbfeddf8c9f, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: db19807ac52b8a44a8044a776e07b1ea, type: 2}
