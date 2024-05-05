@@ -210,6 +210,7 @@ namespace Project.Scripts.Fractures
         
         private static bool ValidateMesh(Mesh mesh)
         {
+            Debug.Log(mesh.name);
             if (mesh.isReadable == false)
             {
                 Debug.LogError($"Mesh [{mesh}] has to be readable.");
